@@ -18,7 +18,8 @@ class UserSeeder extends Seeder
                 'first_name' => 'First',
                 'last_name' => 'Last',
                 'email' => 'ilija.krstic.155.21@ict.edu.rs',
-                'password' => 'password'
+                'password' => 'password',
+                'email_verified_at' => now()
             ]
         ];
 
