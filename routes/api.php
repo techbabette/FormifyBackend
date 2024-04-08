@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\InputController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -29,4 +31,8 @@ Route::prefix('auth')->group(function (){
 
 Route::prefix('form')->group(function (){
     Route::get('/{id}', [FormController::class, 'show']);
+});
+
+Route::prefix('input')->group(function (){
+    Route::get('/', [InputController::class, 'index']);
 });
