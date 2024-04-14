@@ -1,0 +1,26 @@
+services:
+  application:
+    build: .
+    restart: unless-stopped
+    ports:
+     - "80:80"
+     - "443:443"
+    environment:
+      APP_ENV: dev
+    depends_on:
+      mysql :
+        condition: service_healthy
+  mysql:
+    image: mysql:8.3.0
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: formify
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+    healthcheck:
+      test: "mysql -uroot -p formify -e 'select 1'"
+      interval: 1s
+      retries: 120
+    volumes:
+     - formify-database:/var/lib/mysql
+volumes:
+  formify-database:
