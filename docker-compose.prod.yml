@@ -1,6 +1,6 @@
 services:
   application:
-    build: .
+    build: ./application
     restart: unless-stopped
     ports:
      - "80:80"
