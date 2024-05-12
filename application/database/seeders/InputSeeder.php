@@ -15,8 +15,9 @@ class InputSeeder extends Seeder
     {
         $baseInputs = [
           ["text" => "Text", "type" => "text"],
+          ["text" => "Number", "type" => "number"],
           ["text" => "Select", "type" => "select"],
-          ["text" => "Select with default", "type" => "select_with_default"],
+          ["text" => "Select without hint", "type" => "select_without_hint"],
           ["text" => "Select multiple", 'type' => 'select_multiple']
         ];
 

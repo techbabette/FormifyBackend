@@ -48,7 +48,7 @@ class FormInputsSeeder extends Seeder
         ],
         [
             'form_id' => 1,
-            'input_id' => 4,
+            'input_id' => 5,
             'label' => "Classes",
             'required' => true,
             'width' => 12,
