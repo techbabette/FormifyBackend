@@ -40,7 +40,7 @@ class FormInputsSeeder extends Seeder
         ],
         [
             'form_id' => 1,
-            'input_id' => 2,
+            'input_id' => 3,
             'label' => "City",
             'required' => true,
             'width' => 12,
