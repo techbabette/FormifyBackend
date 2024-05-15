@@ -11,7 +11,8 @@ class FormInput extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["form_id", "input_id", "label", "weight", "width", "required", "regex"];
+    protected $fillable = ["form_id", "input_id", "label", "weight", "width", 
+	    		  "required", "regex", "minimum", "maximum"];
 
     public function Options(){
         return $this->hasMany(Option::class);

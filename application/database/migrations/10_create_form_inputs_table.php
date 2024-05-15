@@ -20,6 +20,8 @@ return new class extends Migration
             $table->unsignedInteger("width");
             $table->boolean("required");
             $table->string("regex", 255)->nullable();
+            $table->integer("minimum")->nullable();
+            $table->integer("maximum")->nullable();
             $table->timestamps();
         });
     }
