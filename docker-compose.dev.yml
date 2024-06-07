@@ -8,7 +8,8 @@ services:
     environment:
       APP_ENV: dev
     volumes:
-      - .:/var/www/html
+      - ./application:/var/www/html
+      - vendor:/var/www/html/vendor
     depends_on:
       mysql :
         condition: service_healthy
@@ -26,3 +27,4 @@ services:
      - formify-database:/var/lib/mysql
 volumes:
   formify-database:
+  vendor:
