@@ -8,14 +8,14 @@ use Illuminate\Support\Facades\Auth;
 
 class UserService
 {
-    public function create(UserDTO $user)
+    public function create(UserDTO $user) : int
     {
-        User::create([
+        return User::create([
             'first_name' => $user->first_name,
             'last_name' => $user->last_name,
             'email' => $user->email,
             'password' => $user->password
-        ]);
+        ])->id;
     }
 
     public function login(String $email, String $password) : String{
