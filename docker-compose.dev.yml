@@ -25,6 +25,33 @@ services:
       retries: 120
     volumes:
      - formify-database:/var/lib/mysql
+  mailer-service:
+    build:
+      context: ./mailer-service
+      args:
+        MQ: 'rabbitmq'
+    restart: unless-stopped
+    volumes:
+      - ./mailer-service:/app
+      - /app/node_modules
+    depends_on: 
+      rabbitmq:
+        condition: service_healthy
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    restart: unless-stopped
+    volumes:
+        - rabbitmq_data:/var/lib/rabbitmq/
+        - rabbitmq_logs:/var/log/rabbitmq
+    healthcheck:
+      test: rabbitmq-diagnostics check_port_connectivity
+      interval: 1s
+      timeout: 3s
+      retries: 30
 volumes:
   formify-database:
   vendor:
+  rabbitmq_data:
+  rabbitmq_logs:
+  node_modules:

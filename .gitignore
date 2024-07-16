@@ -18,3 +18,4 @@ application/yarn-error.log
 application//.fleet
 application//.idea
 application//.vscode
+.env
