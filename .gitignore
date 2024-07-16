@@ -19,3 +19,4 @@ application//.fleet
 application//.idea
 application//.vscode
 .env
+node_modules
