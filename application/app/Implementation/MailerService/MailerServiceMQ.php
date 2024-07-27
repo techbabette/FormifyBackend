@@ -1,27 +1,26 @@
 <?php
 
-namespace App\Services;
+namespace App\Implementation\MailerService;
+use App\Services\MailerService;
 
-use App\DataTransferObjects\UserDTO;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Config;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
-class MQService
-{
+class MailerServiceMQ implements MailerService {
     private $MQ_HOST;
     private $exchange_name = 'main_exchange';
     
     public function __construct(){
         $this->MQ_HOST = config("mq.MQ_HOST");
+    }
+    public function registrationEmail(string $first_name, string $last_name, string $email, string $token) : void{
+        $message = json_encode(["name" => $first_name." ".$last_name, "email" => $email, "token" => $token]);
 
+        $this->publishToExchange($message, "mail_token");
     }
 
-    public function publishToExchange($message, string $event_name) : void
+    private function publishToExchange($message, string $event_name) : void
     {
-        var_dump($this->MQ_HOST);
         $connection = new AMQPStreamConnection($this->MQ_HOST, 5672, 'guest', 'guest');
         $channel = $connection->channel();
         
