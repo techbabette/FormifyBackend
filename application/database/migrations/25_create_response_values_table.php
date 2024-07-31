@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId("response_id")->constrained();
             $table->foreignId("form_input_id")->constrained();
-            $table->string("value", 255);
+            $table->mediumText("value");
             $table->timestamps();
         });
     }

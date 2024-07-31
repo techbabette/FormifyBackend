@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             InputSeeder::class,
             FormSeeder::class,
             FormInputsSeeder::class,
-            OptionSeeder::class
+            OptionSeeder::class,
+            RegexOptionSeeder::class
         ]);
     }
 }

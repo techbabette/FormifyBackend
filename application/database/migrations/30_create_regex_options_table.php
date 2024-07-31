@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('regex_options', function (Blueprint $table) {
             $table->id();
-            $table->string("value",255);
+            $table->mediumText("value");
             $table->string("text", 255);
             $table->timestamps();
         });
