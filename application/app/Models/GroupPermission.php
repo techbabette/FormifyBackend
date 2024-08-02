@@ -10,4 +10,9 @@ class GroupPermission extends Model
     use HasFactory;
 
     protected $fillable = ["permission", "group_id"];
+
+    public function group()
+    {
+        return $this->belongsTo(Group::class);
+    }
 }

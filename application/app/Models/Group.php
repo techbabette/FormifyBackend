@@ -10,4 +10,8 @@ class Group extends Model
     use HasFactory;
 
     protected $fillable = ["name", "is_default_unauthenticated", "is_default_registered"];
+
+    public function permissions() {
+        return $this->hasMany(GroupPermission::class);
+    }
 }

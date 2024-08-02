@@ -14,9 +14,8 @@ class GroupSeeder extends Seeder
     public function run(): void
     {
         $baseGroups = [
-            ["name" => "Unauthenticated", "is_default_unauthenticated" => true, "is_default_registered" => false],
-            ["name" => "User", "is_default_unauthenticated" => false, "is_default_registered" => true],
-            ["name" => "Admin", "is_default_unauthenticated" => false, "is_default_registered" => false],
+            ["name" => "User", "is_default_registered" => true],
+            ["name" => "Admin", "is_default_registered" => false],
           ];
   
           foreach ($baseGroups as $group){

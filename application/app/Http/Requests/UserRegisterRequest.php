@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Core\FormRequestAuthorized;
+use App\Core\FormRequestUnauthorized;
 
-class UserRegisterRequest extends FormRequestAuthorized
+class UserRegisterRequest extends FormRequestUnauthorized
 {
     public function getName(){
         return "UserRegister";
