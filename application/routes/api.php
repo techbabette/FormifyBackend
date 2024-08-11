@@ -30,11 +30,11 @@ Route::prefix('auth')->group(function (){
     Route::post('/login', [AuthController::class, 'login']);
 });
 
-Route::prefix('form')->group(function (){
+Route::prefix('forms')->group(function (){
     Route::get('/{id}', [FormController::class, 'show']);
 });
 
-Route::prefix('input')->group(function (){
+Route::prefix('inputs')->group(function (){
     Route::get('/', [InputController::class, 'index']);
 });
 

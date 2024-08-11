@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTransferObjects\UserDTO;
+use App\DataTransferObjects\UserRegistrationDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRegisterRequest;
 use App\Models\EmailVerificationToken;
@@ -21,7 +21,7 @@ class AuthController extends Controller
     }
 
     public function register(UserRegisterRequest $request){
-        $userDTO = UserDTO::fromValidated($request->validated());
+        $userDTO = UserRegistrationDTO::fromValidated($request->validated());
         $newUserId = $this->userService->create($userDTO);
 
         $activationToken = md5(uniqid(rand())).md5(time()).md5(uniqid(rand()));

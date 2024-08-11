@@ -2,7 +2,7 @@
 
 namespace App\DataTransferObjects;
 
-class UserDTO
+class UserRegistrationDTO
 {
     public function __construct
     (

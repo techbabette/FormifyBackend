@@ -22,7 +22,7 @@ class UserService
         $token = Auth::attempt(['email' => $email, 'password' => $password]);
 
         if(!$token){
-            return "";
+            return null;
         }
 
         return $token;
