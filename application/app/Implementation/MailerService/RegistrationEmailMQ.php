@@ -1,19 +1,20 @@
 <?php
 
 namespace App\Implementation\MailerService;
-use App\Services\MailerService;
+use App\Interfaces\MailerService\IRegistrationEmail;
 
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
 
-class MailerServiceMQ implements MailerService {
+class RegistrationEmailMQ implements IRegistrationEmail {
     private $MQ_HOST;
     private $exchange_name = 'main_exchange';
     
     public function __construct(){
         $this->MQ_HOST = config("mq.MQ_HOST");
     }
-    public function registrationEmail(string $first_name, string $last_name, string $email, string $token) : void{
+
+    public function execute(string $first_name, string $last_name, string $email, string $token) : void{
         $message = json_encode(["name" => $first_name." ".$last_name, "email" => $email, "token" => $token]);
 
         $this->publishToExchange($message, "mail_token");

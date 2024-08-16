@@ -7,14 +7,20 @@ use App\Http\Requests\FormCreateRequest;
 use App\Http\Requests\FormListPersonalRequest;
 use App\Http\Requests\FormSubmitResponseRequest;
 use App\Models\Form;
+use App\Services\FormService;
 use Illuminate\Http\Request;
 
 class FormController extends Controller
 {
+    public function __construct(protected FormService $formService)
+    {
+        
+    }
+
     public function show(Request $request){
         $form_id = $request->route()->parameter('id');
 
-        $form = Form::with('FormInputs.SimpleOptions', 'FormInputs.Input')->find($form_id);
+        $form = $this->formService->getForm($form_id);
 
         $response['message'] = 'Successfully retrieved form information';
         $response['body'] = $form;

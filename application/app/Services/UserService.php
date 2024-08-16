@@ -2,19 +2,22 @@
 
 namespace App\Services;
 
-use App\DataTransferObjects\UserDTO;
+use App\DataTransferObjects\UserRegistrationDTO;
+use App\Models\Group;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class UserService
 {
-    public function create(UserDTO $user) : int
+    public function register(UserRegistrationDTO $user) : int
     {
+        $group = Group::where('is_default_registered', true)->first();
         return User::create([
             'first_name' => $user->first_name,
             'last_name' => $user->last_name,
             'email' => $user->email,
-            'password' => $user->password
+            'password' => $user->password,
+            'group_id' => $group->id
         ])->id;
     }
 
