@@ -20,6 +20,10 @@ class ExceptionHandlingMiddleware{
             return response()->json(['message' => $response->exception->getMessage()], 404);
         }
 
+        if($response->status() == 422){
+            return $response;
+        }
+
         return response()->json(['message' => "Server error"], 500);
     }
 }
