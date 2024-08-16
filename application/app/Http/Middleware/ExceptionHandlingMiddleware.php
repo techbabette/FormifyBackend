@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use App\Exceptions\EntityNotFoundException;
+use App\Exceptions\UnauthenticatedException;
+use Illuminate\Validation\ValidationException;
 use Closure;
 use Exception;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +22,11 @@ class ExceptionHandlingMiddleware{
             return response()->json(['message' => $response->exception->getMessage()], 404);
         }
 
-        if($response->status() == 422){
+        if($response->exception instanceof UnauthenticatedException){
+            return response()->json(['message' => $response->exception->getMessage()], 401);
+        }
+
+        if($response->exception instanceof ValidationException){
             return $response;
         }
 

@@ -39,16 +39,6 @@ class AuthController extends Controller
 
         $token = $this->userService->login($email, $password);
 
-        if(!$token){
-            return response()->json(['message' => 'Invalid credentials'], 401);
-        }
-
-        $emailVerified = $this->userService->checkEmailVerification(Auth::user());
-
-        if(!$emailVerified){
-            return response()->json(['message' => 'Email not verified'], 401);
-        }
-
         return response()->json([
             'message' => 'Successfully logged in',
             'body' => $token,

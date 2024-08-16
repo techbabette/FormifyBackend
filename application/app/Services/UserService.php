@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\DataTransferObjects\UserRegistrationDTO;
+use App\Exceptions\UnauthenticatedException;
 use App\Models\Group;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -25,19 +26,14 @@ class UserService
         $token = Auth::attempt(['email' => $email, 'password' => $password]);
 
         if(!$token){
-            return null;
+            throw new UnauthenticatedException("Incorrect email/password combination");
+        }
+
+        if(!Auth::user()->email_verified_at){
+            throw new UnauthenticatedException("Email not verified");
         }
 
         return $token;
     }
-
-    public function checkEmailVerification(User $user) : bool{
-        if(!$user->email_verified_at){
-            return false;
-        }
-
-        return true;
-    }
 }
-
 ?>
