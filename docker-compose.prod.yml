@@ -8,6 +8,7 @@ services:
     environment:
       APP_ENV: production
       MQ: rabbitmq
+      CACHE_DRIVER: redis
       REDIS_HOST: redis
       REDIS_PASSWORD: ${REDIS_PASSWORD:-default_redis}
       REDIS_PORT: 6379
