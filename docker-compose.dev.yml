@@ -8,6 +8,7 @@ services:
     environment:
       APP_ENV: dev
       MQ: rabbitmq
+      DB_PASSWORD: ${MYSQL_PASSWORD:-default_mysql}
       CACHE_DRIVER: redis
       REDIS_HOST: redis
       REDIS_PASSWORD: ${REDIS_PASSWORD:-default_redis}
@@ -29,9 +30,9 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: formify
-      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD:-default_mysql}
     healthcheck:
-      test: "mysql -uroot -p formify -e 'select 1'"
+      test: "mysql -uroot --password=${MYSQL_PASSWORD:-default_mysql} formify -e 'select 1'"
       interval: 1s
       retries: 120
     volumes:
