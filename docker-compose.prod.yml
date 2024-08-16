@@ -8,6 +8,8 @@ services:
     environment:
       APP_ENV: production
       MQ: rabbitmq
+      ADMIN_EMAIL: ${APPLICATION_ADMIN_EMAIL:-mail@fakemail.com}
+      ADMIN_PASSWORD: ${APPLICATION_ADMIN_PASSWORD:-default_application}
       DB_PASSWORD: ${MYSQL_PASSWORD:-default_mysql}
       CACHE_DRIVER: redis
       REDIS_HOST: redis
