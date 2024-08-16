@@ -48,14 +48,12 @@ amqp.connect(`amqp://${process.env.MQ}`, function(error0, connection) {
         channel.bindQueue(q.queue, exchange, event)
 
         channel.consume(q.queue, data => {
-          let message = data.content.toString();
+          let message = JSON.parse(data.content.toString());
           let mailOptions = {
-            to: process.env.RECIEVER,
-            text: message,
-            subject: "Message from nodemailer"
+            to: message.email,
+            text: `Your activation token is ${message.token}`,
+            subject: "Formify activation mail"
           }
-
-          console.log(message);
 
           transporter.sendMail(mailOptions, (error, info) => {
             if (error){
@@ -66,6 +64,8 @@ amqp.connect(`amqp://${process.env.MQ}`, function(error0, connection) {
             console.log("Delivered message", info.messageId);
             channel.ack(data);
           });
+
+          channel.ack(data);
         });
       });
     });

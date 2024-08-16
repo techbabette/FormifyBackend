@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "start": "node --env-file=.env index.js"
+        "start": "node index.js"
     },
     "dependencies": {
         "amqplib": "^0.10.4",

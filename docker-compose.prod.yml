@@ -34,8 +34,12 @@ services:
   mailer-service:
     build:
       context: ./mailer-service
-      args:
-        MQ: 'rabbitmq'
+    environment:
+      MQ: rabbitmq
+      MAILHOST: ${MAIL_HOST}
+      MAIL: ${MAIL_ADDRESS}
+      MAILPASS: ${MAIL_PASSWORD}
+      MAILPORT: ${MAIL_PORT}
     restart: unless-stopped
     depends_on: 
       rabbitmq:

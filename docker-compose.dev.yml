@@ -42,6 +42,12 @@ services:
       args:
         MQ: 'rabbitmq'
     restart: unless-stopped
+    environment:
+      MQ: rabbitmq
+      MAILHOST: ${MAIL_HOST}
+      MAIL: ${MAIL_ADDRESS}
+      MAILPASS: ${MAIL_PASSWORD}
+      MAILPORT: ${MAIL_PORT}
     volumes:
       - ./mailer-service:/app
       - /app/node_modules
