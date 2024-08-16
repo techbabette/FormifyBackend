@@ -26,10 +26,10 @@ class ExceptionHandlingMiddleware{
             return response()->json(['message' => $response->exception->getMessage()], 401);
         }
 
-        if($response->exception instanceof ValidationException){
-            return $response;
+        if($response->status() >= 500){
+            return response()->json(['message' => "Server error"], 500);
         }
 
-        return response()->json(['message' => "Server error"], 500);
+        return $response;
     }
 }
