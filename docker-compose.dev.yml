@@ -48,6 +48,7 @@ services:
       MAIL: ${MAIL_ADDRESS}
       MAILPASS: ${MAIL_PASSWORD}
       MAILPORT: ${MAIL_PORT}
+      MESSAGE_SOURCE: ${MAILER_MESSAGE_SOURCE:-rabbitmq}
     volumes:
       - ./mailer-service:/app
       - /app/node_modules

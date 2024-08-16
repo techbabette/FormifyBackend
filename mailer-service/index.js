@@ -17,7 +17,15 @@ let transporter = nodemailer.createTransport({
   from: process.env.MAIL
 })
 
-amqp.connect(`amqp://${process.env.MQ}`, function(error0, connection) {
+messageSourceMap = {
+  "rabbitmq" : listenRabbitMQ,
+  "sqs" : pollSQS
+}
+
+messageSourceMap[process.env.MESSAGE_SOURCE]();
+
+function listenRabbitMQ(){
+  amqp.connect(`amqp://${process.env.MQ}`, function(error0, connection) {
     if (error0) {
       throw error0;
     }
@@ -70,7 +78,12 @@ amqp.connect(`amqp://${process.env.MQ}`, function(error0, connection) {
       });
     });
   });
+}
 
-  function handleHelloQueue(message){
-    console.log(` [x] Received a message: ${message.content.toString()}, reading env email ${process.env.MAIL}`);
-  }
+function pollSQS(){
+  
+}
+
+function handleHelloQueue(message){
+  console.log(` [x] Received a message: ${message.content.toString()}, reading env email ${process.env.MAIL}`);
+}

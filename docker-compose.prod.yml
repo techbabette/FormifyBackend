@@ -40,6 +40,7 @@ services:
       MAIL: ${MAIL_ADDRESS}
       MAILPASS: ${MAIL_PASSWORD}
       MAILPORT: ${MAIL_PORT}
+      MESSAGE_SOURCE: ${MAILER_MESSAGE_SOURCE:-rabbitmq}
     restart: unless-stopped
     depends_on: 
       rabbitmq:
