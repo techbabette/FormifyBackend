@@ -10,10 +10,12 @@ use App\Implementation\InputService\ListInputsEloquentCache;
 use App\Implementation\MailerService\RegistrationEmailMQ;
 use App\Implementation\RegexOptionService\ListRegexOptionsEloquent;
 use App\Implementation\RegexOptionService\ListRegexOptionsEloquentCache;
+use App\Implementation\UserService\LoginEloquentCache;
 use App\Interfaces\FormService\IGetForm;
 use App\Interfaces\InputService\IListInputs;
 use App\Interfaces\MailerService\IRegistrationEmail;
 use App\Interfaces\RegexOptionService\IListRegexOptions;
+use App\Interfaces\UserService\ILogin;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -29,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IGetForm::class, GetFormEloquentCache::class);
         $this->app->bind(IListInputs::class, ListInputsEloquentCache::class);
         $this->app->bind(IListRegexOptions::class, ListRegexOptionsEloquentCache::class);
+        $this->app->bind(ILogin::class, LoginEloquentCache::class);
     }
 
     /**

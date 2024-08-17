@@ -3,13 +3,16 @@
 namespace App\Services;
 
 use App\DataTransferObjects\UserRegistrationDTO;
-use App\Exceptions\UnauthenticatedException;
+use App\Interfaces\UserService\ILogin;
 use App\Models\Group;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 class UserService
 {
+    public function __construct(protected ILogin $login)
+    {
+        
+    }
     public function register(UserRegistrationDTO $user) : int
     {
         $group = Group::where('is_default_registered', true)->first();
@@ -23,17 +26,7 @@ class UserService
     }
 
     public function login(String $email, String $password) : String{
-        $token = Auth::attempt(['email' => $email, 'password' => $password]);
-
-        if(!$token){
-            throw new UnauthenticatedException("Incorrect email/password combination");
-        }
-
-        if(!Auth::user()->email_verified_at){
-            throw new UnauthenticatedException("Email not verified");
-        }
-
-        return $token;
+        return $this->login->execute($email, $password);
     }
 }
 ?>
