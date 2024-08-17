@@ -4,12 +4,14 @@ namespace App\Services;
 
 use App\DataTransferObjects\UserRegistrationDTO;
 use App\Interfaces\UserService\ILogin;
+use App\Interfaces\UserService\ILogout;
 use App\Models\Group;
 use App\Models\User;
 
 class UserService
 {
-    public function __construct(protected ILogin $login)
+    public function __construct(protected ILogin $login,
+                                protected ILogout $logout)
     {
         
     }
@@ -27,6 +29,10 @@ class UserService
 
     public function login(String $email, String $password) : String{
         return $this->login->execute($email, $password);
+    }
+
+    public function logout($token) : void{
+        $this->logout->execute($token);
     }
 }
 ?>

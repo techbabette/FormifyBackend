@@ -46,4 +46,13 @@ class AuthController extends Controller
             'expires_in' => auth()->factory()->getTTL() * 60
         ]);
     }
+
+    //TODO: Create authorized request and no-dabatase authorizer
+    public function logout(Request $request){
+        $token = $request->bearerToken();
+
+        $this->userService->logout($token);
+
+        return response()->json(['message' => "Successfully signed out"], 200);
+    }
 }
