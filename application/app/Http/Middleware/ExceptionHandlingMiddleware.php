@@ -27,6 +27,7 @@ class ExceptionHandlingMiddleware{
         }
 
         if($response->status() >= 500){
+            return $response;
             return response()->json(['message' => "Server error"], 500);
         }
 

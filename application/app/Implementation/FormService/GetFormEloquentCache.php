@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cache;
 use App\Models\Form;
 use App\Exceptions\EntityNotFoundException;
 
-class GetFormEloquentRedis implements IGetForm{
+class GetFormEloquentCache implements IGetForm{
     public function execute (int $id) : object{
         $cacheIdentifier = "form:full:$id";
         $cacheDurationSeconds = 300;
