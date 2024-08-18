@@ -10,7 +10,7 @@ class Form extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["user_id", "name"];
+    protected $fillable = ["user_id", "name", "resetButtonAvailable"];
 
     public function FormInputs(){
         return $this->hasMany(FormInput::class);

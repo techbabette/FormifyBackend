@@ -14,7 +14,7 @@ class FormSeeder extends Seeder
     public function run(): void
     {
         $baseForms = [
-          ["name" => "First form", "user_id" => "1"]
+          ["name" => "First form", "user_id" => "1", "resetButtonAvailable" => true]
         ];
 
         foreach ($baseForms as $form){
