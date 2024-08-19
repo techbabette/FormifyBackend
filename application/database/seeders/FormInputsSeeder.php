@@ -54,6 +54,22 @@ class FormInputsSeeder extends Seeder
             'width' => 12,
             'weight' => 80,
         ],
+        [
+            "form_id" => 2,
+            "input_id" => 4,
+            "label" => "Yes/no question",
+            "required" => true,
+            "width" => 12,
+            "weight" => 100
+        ],
+        [
+            "form_id" => 2,
+            "input_id" => 1,
+            "label" => "Some information",
+            "required" => true,
+            "width" => 12,
+            "weight" => 95
+        ]
     ];
 
         foreach($baseFormInputs as $formInput){

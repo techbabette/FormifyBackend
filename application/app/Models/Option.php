@@ -9,5 +9,5 @@ class Option extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["form_input_id", "value"];
+    protected $fillable = ["form_input_id", "value", "default_selected"];
 }

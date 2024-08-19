@@ -19,7 +19,7 @@ class FormInput extends Model
     }
 
     public function SimpleOptions(){
-        return $this->hasMany(Option::class)->select(['form_input_id', 'value']);
+        return $this->hasMany(Option::class)->select(['form_input_id', 'value', "default_selected"]);
     }
 
     public function Input(){

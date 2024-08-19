@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId("form_input_id")->constrained();
             $table->string("value", 255);
+            $table->boolean("default_selected")->default(false);
             $table->timestamps();
         });
     }

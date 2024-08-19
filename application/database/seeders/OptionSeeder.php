@@ -20,6 +20,9 @@ class OptionSeeder extends Seeder
             ["form_input_id" => 5, "value" => "C#"],
             ["form_input_id" => 5, "value" => "PHP"],
             ["form_input_id" => 5, "value" => "React"],
+
+            ["form_input_id" => 6, "value" => "Yes"],
+            ["form_input_id" => 6, "value" => "No", "default_selected" => true]
         ];
 
         foreach($baseOptions as $option){
