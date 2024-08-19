@@ -1,5 +1,5 @@
-var amqp = require('amqplib/callback_api');
 var nodemailer = require('nodemailer');
+var rabbitmq = require('./listeners/rabbitmq.js');
 
 let transporter = nodemailer.createTransport({
   host: process.env.MAILHOST,
@@ -18,72 +18,13 @@ let transporter = nodemailer.createTransport({
 })
 
 messageSourceMap = {
-  "rabbitmq" : listenRabbitMQ,
+  "rabbitmq" : rabbitmq,
   "sqs" : pollSQS
 }
 
-messageSourceMap[process.env.MESSAGE_SOURCE]();
+functionToRun = messageSourceMap[process.env.MESSAGE_SOURCE];
+functionToRun(transporter);
 
-function listenRabbitMQ(){
-  amqp.connect(`amqp://${process.env.MQ}`, function(error0, connection) {
-    if (error0) {
-      throw error0;
-    }
-    connection.createChannel(function(error1, channel) {
-      if (error1) {
-        throw error1;
-      }
-      var exchange = 'main_exchange';
-      var queue = "mail_queue"
-      var event = "mail_token"
-
-
-      channel.assertExchange(exchange, 'direct', {
-        durable : true
-      });
-
-      channel.assertQueue(queue, {
-        exclusive: false
-      }, function(error2, q){
-        if (error2){
-          throw error2;
-        }
-
-        channel.prefetch(1);
-
-        console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", queue);
-
-        channel.bindQueue(q.queue, exchange, event)
-
-        channel.consume(q.queue, data => {
-          let message = JSON.parse(data.content.toString());
-          let mailOptions = {
-            to: message.email,
-            text: `Your activation token is ${message.token}`,
-            subject: "Formify activation mail"
-          }
-
-          transporter.sendMail(mailOptions, (error, info) => {
-            if (error){
-              console.log(error.stack)
-              return channel.nack(data);
-            }
-      
-            console.log("Delivered message", info.messageId);
-            channel.ack(data);
-          });
-
-          channel.ack(data);
-        });
-      });
-    });
-  });
-}
-
-function pollSQS(){
+function pollSQS(transporter){
   
-}
-
-function handleHelloQueue(message){
-  console.log(` [x] Received a message: ${message.content.toString()}, reading env email ${process.env.MAIL}`);
 }
