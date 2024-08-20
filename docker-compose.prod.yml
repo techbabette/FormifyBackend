@@ -35,8 +35,7 @@ services:
     volumes:
      - formify-database:/var/lib/mysql
   mailer-service:
-    build:
-      context: ./mailer-service
+    image: public.ecr.aws/g8v6p9z8/formify/mailer-service
     restart: unless-stopped
     environment:
       MQ: rabbitmq
