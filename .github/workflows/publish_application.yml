@@ -33,5 +33,5 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       env:
         ECR_REGISTRY: ${{ steps.login_ecr.outputs.registry }}
-        ECR_REPOSITORY: formify/application
+        ECR_REPOSITORY: formify\/application
         IMAGE_TAG: latest
