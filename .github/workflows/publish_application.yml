@@ -34,6 +34,6 @@ jobs:
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       env:
         ECR_REGISTRY: ${{ steps.login_ecr.outputs.registry }}
-        ECR_REGISTRY_ALIAS: ${{ env.ECR_REGISTRY_ALIAS }}
+        ECR_REGISTRY_ALIAS: ${{ vars.ECR_REGISTRY_ALIAS }}
         ECR_REPOSITORY: formify/application
         IMAGE_TAG: latest
