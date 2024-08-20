@@ -29,10 +29,11 @@ jobs:
 
     - name: Build and push to ECR
       run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./application
+        docker build -t $ECR_REGISTRY/$ECR_REGISTRY_ALIAS/$ECR_REPOSITORY:$IMAGE_TAG ./application
         echo $ECR_REGISTRY
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       env:
         ECR_REGISTRY: ${{ steps.login_ecr.outputs.registry }}
+        ECR_REGISTRY_ALIAS: ${{ env.ECR_REGISTRY_ALIAS }}
         ECR_REPOSITORY: formify/application
         IMAGE_TAG: latest
