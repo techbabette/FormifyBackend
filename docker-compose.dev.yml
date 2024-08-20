@@ -2,6 +2,7 @@ services:
   application:
     build: ./application
     restart: unless-stopped
+    user: "${UID:-0}:${GID:-0}"
     ports:
      - "80:80"
      - "443:443"
