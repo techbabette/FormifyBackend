@@ -14,6 +14,7 @@ class GroupSeeder extends Seeder
     public function run(): void
     {
         $baseGroups = [
+            ["name" => "Logged out", "is_default_registered" => false],
             ["name" => "User", "is_default_registered" => true],
             ["name" => "Admin", "is_default_registered" => false],
           ];

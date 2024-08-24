@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
                 'email' => config('admin.ADMIN_EMAIL'),
                 'password' => config('admin.ADMIN_PASSWORD'),
                 'email_verified_at' => now(),
-                'group_id' => 2
+                'group_id' => 3
             ]
         ];
 
