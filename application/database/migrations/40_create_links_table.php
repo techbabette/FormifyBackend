@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('links', function (Blueprint $table) {
             $table->id();
-            $tahle->string("position", 100);
+            $table->string("position", 100);
             $table->string("text", 50);
             $table->string("to", 100);
             $table->integer("weight")->unsigned;

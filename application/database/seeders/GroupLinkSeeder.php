@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\GroupLink;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -33,7 +34,7 @@ class GroupLinkSeeder extends Seeder
           ];
   
           foreach ($baseGroupLinks as $group){
-            Group::insert($group);
+            GroupLink::insert($group);
           }
     }
 }

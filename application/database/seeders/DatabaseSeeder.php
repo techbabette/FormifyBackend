@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
             FormSeeder::class,
             FormInputsSeeder::class,
             OptionSeeder::class,
-            RegexOptionSeeder::class
+            RegexOptionSeeder::class,
+            LinkSeeder::class,
+            GroupLinkSeeder::class
         ]);
     }
 }
