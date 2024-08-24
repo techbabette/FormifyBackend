@@ -7,6 +7,8 @@ use App\Implementation\Authorizer\AuthorizerGroupsEloquent;
 use App\Implementation\FormService\GetFormEloquent;
 use App\Implementation\FormService\GetFormEloquentCache;
 use App\Implementation\InputService\ListInputsEloquentCache;
+use App\Implementation\LinkService\ListLinksEloquent;
+use App\Implementation\LinkService\ListLinksEloquentCache;
 use App\Implementation\MailerService\RegistrationEmailMQ;
 use App\Implementation\RegexOptionService\ListRegexOptionsEloquent;
 use App\Implementation\RegexOptionService\ListRegexOptionsEloquentCache;
@@ -14,6 +16,7 @@ use App\Implementation\UserService\LoginEloquentCache;
 use App\Implementation\UserService\LogoutCache;
 use App\Interfaces\FormService\IGetForm;
 use App\Interfaces\InputService\IListInputs;
+use App\Interfaces\LinkService\IListLinks;
 use App\Interfaces\MailerService\IRegistrationEmail;
 use App\Interfaces\RegexOptionService\IListRegexOptions;
 use App\Interfaces\UserService\ILogin;
@@ -35,6 +38,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IListRegexOptions::class, ListRegexOptionsEloquentCache::class);
         $this->app->bind(ILogin::class, LoginEloquentCache::class);
         $this->app->bind(ILogout::class, LogoutCache::class);
+        $this->app->bind(IListLinks::class, ListLinksEloquentCache::class);
     }
 
     /**

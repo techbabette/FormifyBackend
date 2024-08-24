@@ -10,4 +10,14 @@ class GroupLink extends Model
     use HasFactory;
 
     protected $fillable = ["group_id", "link_id"];
+
+    public function Group()
+    {
+        return $this->belongsTo(Group::class);
+    }
+
+    public function Link()
+    {
+        return $this->belongsTo(Link::class);
+    }
 }

@@ -10,4 +10,9 @@ class Link extends Model
     use HasFactory;
 
     protected $fillable = ["position", "text", "to", "weight"];
+
+    public function GroupLinks()
+    {
+        return $this->hasMany(GroupLink::class);
+    }
 }

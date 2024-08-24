@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\InputController;
+use App\Http\Controllers\LinkController;
 use App\Http\Controllers\RegexOptionsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -41,4 +42,8 @@ Route::prefix('inputs')->group(function (){
 
 Route::prefix('regex_options')->group(function (){
     Route::get('/', [RegexOptionsController::class, 'index']);
+});
+
+Route::prefix('links')->group(function (){
+    Route::get("/", [LinkController::class, "index"]);
 });

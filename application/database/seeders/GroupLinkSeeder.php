@@ -20,15 +20,11 @@ class GroupLinkSeeder extends Seeder
             ["group_id" => 1, "link_id" => 4],
             ["group_id" => 1, "link_id" => 5],
 
-            ["group_id" => 2, "link_id" => 1],
             ["group_id" => 2, "link_id" => 2],
-            ["group_id" => 2, "link_id" => 3],
             ["group_id" => 2, "link_id" => 4],
             ["group_id" => 2, "link_id" => 5],
 
-            ["group_id" => 3, "link_id" => 1],
             ["group_id" => 3, "link_id" => 2],
-            ["group_id" => 3, "link_id" => 3],
             ["group_id" => 3, "link_id" => 4],
             ["group_id" => 3, "link_id" => 5],
           ];
