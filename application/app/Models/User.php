@@ -63,6 +63,6 @@ class User extends Authenticatable implements JWTSubject
      */
     public function getJWTCustomClaims()
     {
-        return [];
+        return ["group" => $this->group->name, "permissions" => $this->group->permissions->pluck('permission')];
     }
 }
