@@ -6,11 +6,11 @@ use App\Interfaces\RegexOptionService\IListRegexOptions;
 use Illuminate\Support\Facades\Cache;
 use App\Models\RegexOption;
 
-class ListRegexOptionsEloquentCache implements IListRegexOptions {
+class ListRegexOptionsEloquentCache extends ListRegexOptionsEloquent {
     public function execute() : array{
         $cacheIdentifier = "regexoptions:list";
         $regexOptions = Cache::rememberForever($cacheIdentifier, function () {
-            return RegexOption::select('id', 'text', 'value')->get()->toArray();
+            return parent::execute();
         });
         return $regexOptions;
     }

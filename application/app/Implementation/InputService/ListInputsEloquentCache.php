@@ -6,13 +6,11 @@ use App\Interfaces\InputService\IListInputs;
 use Illuminate\Support\Facades\Cache;
 use App\Models\Input;
 
-class ListInputsEloquentCache implements IListInputs{
+class ListInputsEloquentCache extends ListInputsEloquent {
     public function execute () : array{
         $cacheIdentifier = "inputs:list";
         $inputs = Cache::rememberForever($cacheIdentifier, function () {
-            $result = Input::select('id', 'text', 'type')->get()->toArray();
-
-            return $result;
+            return parent::execute();
         });
         return $inputs;
     }
