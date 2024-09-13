@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTransferObjects\UserRegistrationDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserLoginRequest;
+use App\Http\Requests\UserLogoutRequest;
 use App\Http\Requests\UserRegisterRequest;
 use App\Models\EmailVerificationToken;
 use App\Services\UserService;
@@ -49,7 +50,7 @@ class AuthController extends Controller
     }
 
     //TODO: Create authorized request and no-dabatase authorizer
-    public function logout(Request $request){
+    public function logout(UserLogoutRequest $request){
         $token = $request->bearerToken();
 
         $this->userService->logout($token);

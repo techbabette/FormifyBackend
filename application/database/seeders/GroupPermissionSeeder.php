@@ -14,8 +14,10 @@ class GroupPermissionSeeder extends Seeder
     public function run(): void
     {
         $baseGroupPermissions = [
+            ["permission" => "UserLogoutRequest", "group_id" => 2],
+            ["permission" => "UserLogoutRequest", "group_id" => 3],
           ];
-  
+
           foreach ($baseGroupPermissions as $groupPermission){
             GroupPermission::insert($groupPermission);
           }
