@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DataTransferObjects\UserRegistrationDTO;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
 use App\Models\EmailVerificationToken;
 use App\Services\UserService;
@@ -32,8 +33,8 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'Successfully registered, check your email'], 200);
     }
-    
-    public function login(Request $request){
+
+    public function login(UserLoginRequest $request){
         $email = $request['email'];
         $password = $request['password'];
 
