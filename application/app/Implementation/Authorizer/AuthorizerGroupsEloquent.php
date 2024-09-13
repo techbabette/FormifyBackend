@@ -13,7 +13,7 @@ class AuthorizerGroupsEloquent implements IAuthorizer {
         }
 
         $group = $userLoggedIn->group;
-        $groupPermissions = $group->permissions->pluck('permission');
+        $groupPermissions = $group->permissions->pluck('permission')->toArray();
         $groupHasRequestPermission = in_array($requestPermission, $groupPermissions);
 
         return $groupHasRequestPermission;
