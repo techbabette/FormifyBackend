@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Core\IAuthorizer;
+use App\Implementation\Authorizer\AuthorizerCache;
 use App\Implementation\Authorizer\AuthorizerGroupsEloquent;
 use App\Implementation\FormService\GetFormEloquent;
 use App\Implementation\FormService\GetFormEloquentCache;
@@ -31,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(IRegistrationEmail::class, RegistrationEmailMQ::class);
-        $this->app->bind(IAuthorizer::class, AuthorizerGroupsEloquent::class);
+        $this->app->bind(IAuthorizer::class, AuthorizerCache::class);
 
         $this->app->bind(IGetForm::class, GetFormEloquentCache::class);
         $this->app->bind(IListInputs::class, ListInputsEloquentCache::class);
