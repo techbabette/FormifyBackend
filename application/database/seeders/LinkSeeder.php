@@ -14,13 +14,13 @@ class LinkSeeder extends Seeder
     public function run(): void
     {
         $baseLinks = [
-            ["text" => "Login", "position" => "main_navbar", "to" => "/login", "weight" => 100],
+            ["text" => "Login", "position" => "main_navbar", "to" => "/login", "weight" => 80],
             ["text" => "Home", "position" => "main_navbar", "to" => "/", "weight" => 100],
-            ["text" => "Register", "position" => "main_navbar", "to" => "/register", "weight" => 100],
-            ["text" => "Create new form", "position" => "main_navbar", "to" => "/form/new", "weight" => 100],
+            ["text" => "Register", "position" => "main_navbar", "to" => "/register", "weight" => 70],
+            ["text" => "Create new form", "position" => "main_navbar", "to" => "/form/new", "weight" => 90],
             ["text" => "Make your own form here!", "position" => "visiting_form_navbar", "to" => "/form/new", "weight" => 100]
           ];
-  
+
           foreach ($baseLinks as $input){
               Link::insert($input);
           }
