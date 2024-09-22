@@ -12,8 +12,12 @@ class AuthorizerCache implements IAuthorizer
     public function authorize(string $requestPermission): bool
     {
         $bearerToken = Request::header('Authorization');
-        $jwtToken = explode(" ", $bearerToken)[1];
 
+        if(!$bearerToken){
+            return false;
+        }
+
+        $jwtToken = explode(" ", $bearerToken)[1];
         $permissions = auth()->payload()['permissions'];
         $requestPermissionIncluded = in_array($requestPermission, $permissions);
         if (!$requestPermissionIncluded) {
