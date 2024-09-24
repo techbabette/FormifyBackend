@@ -6,10 +6,6 @@ use App\Core\FormRequestUnauthorized;
 
 class FormSubmitResponseRequest extends FormRequestUnauthorized
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-
      public function getName() : String {
         return "FormSubmitAnswer";
      }

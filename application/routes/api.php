@@ -34,6 +34,7 @@ Route::prefix('auth')->group(function (){
 
 Route::prefix('forms')->group(function (){
     Route::get('/{id}', [FormController::class, 'show']);
+    Route::post("/{id}/responses", [FormController::class, 'createResponse']);
 });
 
 Route::prefix('inputs')->group(function (){

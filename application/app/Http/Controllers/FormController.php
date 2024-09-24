@@ -7,6 +7,8 @@ use App\Http\Requests\FormCreateRequest;
 use App\Http\Requests\FormListPersonalRequest;
 use App\Http\Requests\FormSubmitResponseRequest;
 use App\Models\Form;
+use App\Models\Response;
+use App\Models\ResponseValue;
 use App\Services\FormService;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,7 @@ class FormController extends Controller
 {
     public function __construct(protected FormService $formService)
     {
-        
+
     }
 
     public function show(Request $request){
@@ -41,6 +43,25 @@ class FormController extends Controller
 
         $response['message'] = 'Successfully submitted your answer!';
 
+        $newResponseId = Response::create(['form_id' => $form_id])->id;
+
+        $responseValues = $request->all();
+
+        foreach($responseValues as $key => $value){
+            if(is_array($value) ){
+                foreach($value as $subValue){
+                    ResponseValue::create(['response_id' => $newResponseId, 'form_input_id' => $key, 'value' => $subValue]);
+                }
+                continue;
+            }
+            ResponseValue::create(['response_id' => $newResponseId, 'form_input_id' => $key, 'value' => $value]);
+        }
+
         return response()->json($response);
+    }
+
+    //TODO make authorized request
+    public function listResponses(Request $request){
+        $form_id = $request->route()->parameter('id');
     }
 }

@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class ResponseValue extends Model
 {
     use HasFactory;
+
+    protected $fillable = ["response_id", "value", "form_input_id"];
 }
