@@ -10,4 +10,9 @@ class ResponseValue extends Model
     use HasFactory;
 
     protected $fillable = ["response_id", "value", "form_input_id"];
+
+    public function formInput()
+    {
+        return $this->belongsTo(FormInput::class);
+    }
 }
