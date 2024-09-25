@@ -53,10 +53,11 @@ services:
       MAILPASS: ${MAIL_PASSWORD}
       MAILPORT: ${MAIL_PORT}
       MESSAGE_SOURCE: ${MAILER_MESSAGE_SOURCE:-rabbitmq}
+      ACTIVATION_URL: ${FRONTEND_ACTIVATION_URL}
     volumes:
       - ./mailer-service:/app
       - /app/node_modules
-    depends_on: 
+    depends_on:
       rabbitmq:
         condition: service_healthy
   rabbitmq:

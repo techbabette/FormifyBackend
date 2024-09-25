@@ -44,7 +44,8 @@ services:
       MAILPASS: ${MAIL_PASSWORD}
       MAILPORT: ${MAIL_PORT}
       MESSAGE_SOURCE: ${MAILER_MESSAGE_SOURCE:-rabbitmq}
-    depends_on: 
+      ACTIVATION_URL: ${FRONTEND_ACTIVATION_URL}
+    depends_on:
       rabbitmq:
         condition: service_healthy
   rabbitmq:
