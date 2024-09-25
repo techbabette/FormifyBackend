@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Exceptions\EntityNotFoundException;
 use App\Exceptions\UnauthenticatedException;
+use App\Exceptions\UnauthorizedException;
 use Cassandra\Exception\ValidationException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Closure;
@@ -25,6 +26,10 @@ class ExceptionHandlingMiddleware{
 
         if($response->exception instanceof UnauthenticatedException){
             return response()->json(['message' => $response->exception->getMessage()], 401);
+        }
+
+        if($response->exception instanceof UnauthorizedException){
+            return response()->json(['message' => $response->exception->getMessage()], 403);
         }
 
         if($response->exception instanceof TokenExpiredException){
