@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Core\IAuthorizer;
 use App\Implementation\Authorizer\AuthorizerCache;
 use App\Implementation\Authorizer\AuthorizerGroupsEloquent;
+use App\Implementation\FormService\FormSubmitResponseEloquent;
 use App\Implementation\FormService\GetFormEloquent;
 use App\Implementation\FormService\GetFormEloquentCache;
 use App\Implementation\FormService\ListResponsesEloquent;
@@ -16,6 +17,7 @@ use App\Implementation\RegexOptionService\ListRegexOptionsEloquent;
 use App\Implementation\RegexOptionService\ListRegexOptionsEloquentCache;
 use App\Implementation\UserService\LoginEloquentCache;
 use App\Implementation\UserService\LogoutCache;
+use App\Interfaces\FormService\IFormSubmitResponse;
 use App\Interfaces\FormService\IGetForm;
 use App\Interfaces\FormService\IListFormResponses;
 use App\Interfaces\InputService\IListInputs;
@@ -44,6 +46,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IListLinks::class, ListLinksEloquentCache::class);
 
         $this->app->bind(IListFormResponses::class, ListResponsesEloquent::class);
+        $this->app->bind(IFormSubmitResponse::class, FormSubmitResponseEloquent::class);
     }
 
     /**

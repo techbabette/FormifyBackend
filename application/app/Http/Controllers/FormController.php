@@ -8,8 +8,6 @@ use App\Http\Requests\FormListPersonalRequest;
 use App\Http\Requests\FormListResponsesRequest;
 use App\Http\Requests\FormSubmitResponseRequest;
 use App\Models\Form;
-use App\Models\Response;
-use App\Models\ResponseValue;
 use App\Services\FormService;
 use Illuminate\Http\Request;
 
@@ -43,20 +41,7 @@ class FormController extends Controller
         $form_id = $request->route()->parameter('id');
 
         $response['message'] = 'Successfully submitted your answer!';
-
-        $newResponseId = Response::create(['form_id' => $form_id])->id;
-
-        $responseValues = $request->all();
-
-        foreach($responseValues as $key => $value){
-            if(is_array($value) ){
-                foreach($value as $subValue){
-                    ResponseValue::create(['response_id' => $newResponseId, 'form_input_id' => $key, 'value' => $subValue]);
-                }
-                continue;
-            }
-            ResponseValue::create(['response_id' => $newResponseId, 'form_input_id' => $key, 'value' => $value]);
-        }
+        $this->formService->submitResponse($form_id, $request->all());
 
         return response()->json($response);
     }
