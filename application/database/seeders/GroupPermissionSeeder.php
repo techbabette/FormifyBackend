@@ -16,6 +16,9 @@ class GroupPermissionSeeder extends Seeder
         $baseGroupPermissions = [
             ["permission" => "UserLogoutRequest", "group_id" => 2],
             ["permission" => "UserLogoutRequest", "group_id" => 3],
+
+            ["permission" => "FormListResponses", "group_id" => 2],
+            ["permission" => "FormListResponses", "group_id" => 3],
           ];
 
           foreach ($baseGroupPermissions as $groupPermission){

@@ -4,7 +4,8 @@ namespace App\Http\Middleware;
 
 use App\Exceptions\EntityNotFoundException;
 use App\Exceptions\UnauthenticatedException;
-use Illuminate\Validation\ValidationException;
+use Cassandra\Exception\ValidationException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Closure;
 use Exception;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +14,7 @@ use Illuminate\Http\Request;
 class ExceptionHandlingMiddleware{
     public function handle($request, Closure $next){
         $response = $next($request);
-        
+
         if(empty($response->exception)){
             return $response;
         }
@@ -24,6 +25,10 @@ class ExceptionHandlingMiddleware{
 
         if($response->exception instanceof UnauthenticatedException){
             return response()->json(['message' => $response->exception->getMessage()], 401);
+        }
+
+        if($response->exception instanceof TokenExpiredException){
+            return response()->json(['error' => 'Session expired'], 401);
         }
 
         if($response->status() >= 500){

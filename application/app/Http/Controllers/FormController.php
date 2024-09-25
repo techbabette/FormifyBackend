@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FormCreateRequest;
 use App\Http\Requests\FormListPersonalRequest;
+use App\Http\Requests\FormListResponsesRequest;
 use App\Http\Requests\FormSubmitResponseRequest;
 use App\Models\Form;
 use App\Models\Response;
@@ -60,58 +61,11 @@ class FormController extends Controller
         return response()->json($response);
     }
 
-    //TODO make authorized request
-    public function listResponses(Request $request){
+    public function listResponses(FormListResponsesRequest $request){
         $form_id = $request->route()->parameter('id');
 
         $response['message'] = "Successfully retrieved form responses";
-
-        $responses = Response::query();
-        $responses->where('form_id', $form_id);
-
-        $responses->with("responseValues.formInput");
-        $paginatedResponses = $responses->paginate(5);
-
-        $reformatedResponses = [];
-
-        foreach ($paginatedResponses->items() as $responseItem) {
-            $reformatedResponse = [
-                "id" => $responseItem->id,
-                "created_at" => $responseItem->created_at,
-                "values" => []
-            ];
-
-            foreach ($responseItem->responseValues as $responseValue) {
-                $responseValueKey = $responseValue->formInput->label;
-
-                $responseValueKeyExists = array_key_exists($responseValueKey, $reformatedResponse["values"]);
-
-                if(!$responseValueKeyExists){
-                    $reformatedResponse["values"][$responseValueKey] = $responseValue->value;
-                    continue;
-
-                }
-
-                if(is_array($reformatedResponse["values"][$responseValueKey])) {
-                    $reformatedResponse["values"][$responseValueKey][] = $responseValue->value;
-                    continue;
-                }
-
-                $reformatedResponse["values"][$responseValueKey] = [$reformatedResponse["values"][$responseValueKey]];
-                $reformatedResponse["values"][$responseValueKey][] = $responseValue->value;
-            }
-
-            $reformatedResponses[] = $reformatedResponse;
-        }
-
-
-        $response["body"] = [
-            "data" => $reformatedResponses,
-            "current_page" => $paginatedResponses->currentPage(),
-            "last_page" => $paginatedResponses->lastPage(),
-            "per_page" => $paginatedResponses->perPage(),
-            "total" => $paginatedResponses->total(),
-        ];
+        $response["body"] = $this->formService->listResponses($form_id);
 
         return response()->json($response);
     }
