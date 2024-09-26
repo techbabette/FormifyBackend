@@ -30,7 +30,12 @@ class FormController extends Controller
     }
 
     public function listPersonalForms(FormListPersonalRequest $request){
+        $user_id = auth()->user()->id;
 
+        $response["message"] = "Successfully retrieved forms";
+        $response["body"] = $this->formService->listPersonalForms($user_id);
+
+        return response()->json($response);
     }
 
     public function createForm(FormCreateRequest $request){

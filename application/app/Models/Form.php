@@ -15,4 +15,8 @@ class Form extends Model
     public function FormInputs(){
         return $this->hasMany(FormInput::class);
     }
+
+    public function responses(){
+        return $this->hasMany(Response::class);
+    }
 }

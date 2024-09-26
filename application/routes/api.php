@@ -33,6 +33,7 @@ Route::prefix('auth')->group(function (){
 });
 
 Route::prefix('forms')->group(function (){
+    Route::get("/me", [FormController::class, 'listPersonalForms']);
     Route::get('/{id}', [FormController::class, 'show']);
     Route::get("/{id}/responses", [FormController::class, 'listResponses']);
     Route::post("/{id}/responses", [FormController::class, 'createResponse']);
