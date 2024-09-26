@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Interfaces\FormService\IFormCreate;
 use App\Interfaces\FormService\IFormSubmitResponse;
 use App\Interfaces\FormService\IGetForm;
 use App\Interfaces\FormService\IListFormResponses;
@@ -11,7 +12,8 @@ class FormService {
     public function __construct(protected IGetForm $getForm,
                                 protected  IListFormResponses $listResponses,
                                 protected IFormSubmitResponse $submitResponse,
-                                protected  IListPersonalForms $listPersonalForms){
+                                protected  IListPersonalForms $listPersonalForms,
+                                protected IFormCreate  $createForm){
     }
 
     public function getForm(int $id){
@@ -28,6 +30,10 @@ class FormService {
 
     public function listPersonalForms(int $user_id){
         return $this->listPersonalForms->execute($user_id);
+    }
+
+    public function createForm(int $user_id, array $values){
+        return $this->createForm->execute($user_id, $values);
     }
 }
 ?>
