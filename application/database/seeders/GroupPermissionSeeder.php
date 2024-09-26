@@ -22,6 +22,9 @@ class GroupPermissionSeeder extends Seeder
 
             ["permission" => "FormListPersonal", "group_id" => 2],
             ["permission" => "FormListPersonal", "group_id" => 3],
+
+            ["permission" => "FormCreate", "group_id" => 2],
+            ["permission" => "FormCreate", "group_id" => 3],
           ];
 
           foreach ($baseGroupPermissions as $groupPermission){

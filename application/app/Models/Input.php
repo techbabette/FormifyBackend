@@ -11,5 +11,7 @@ class Input extends Model
 
     protected $fillable = ["text", "type"];
 
-
+    public static function typesWithOptions(){
+        return [3, 4, 5];
+    }
 }
