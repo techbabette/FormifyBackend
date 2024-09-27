@@ -11,12 +11,13 @@ use Closure;
 use Exception;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 class ExceptionHandlingMiddleware{
     public function handle($request, Closure $next){
+        DB::beginTransaction();
         $response = $next($request);
-
         if(empty($response->exception)){
+            DB::commit();
             return $response;
         }
 
