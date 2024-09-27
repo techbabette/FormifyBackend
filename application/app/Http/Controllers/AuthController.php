@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserLogoutRequest;
 use App\Http\Requests\UserRegisterRequest;
+use App\Http\Requests\UserVerifyRequest;
 use App\Models\EmailVerificationToken;
+use App\Models\User;
 use App\Services\UserService;
 use App\Services\MailerService;
 use App\Services\EmailVerificationTokenService;
@@ -49,7 +51,26 @@ class AuthController extends Controller
         ]);
     }
 
-    //TODO: Create authorized request and no-dabatase authorizer
+    public function verify(UserVerifyRequest $request){
+        $routeToken = $request->route('token');
+
+        //Use token and return user
+        $tokenObject = EmailVerificationToken::where('token', '=', $routeToken)->first();
+        $userToActivateId = $tokenObject->user->id;
+        $tokenObject->delete();
+
+        //ACTIVATE USER
+        $user = User::find($userToActivateId);
+        $timeOfActivation = now();
+        $user->email_verified_at = $timeOfActivation;
+        $user->save();
+
+
+        $token = auth()->login($user);
+
+        return response()->json(['message' => 'Successfully activated account', 'body' => $token], 201);
+    }
+
     public function logout(UserLogoutRequest $request){
         $token = $request->bearerToken();
 
