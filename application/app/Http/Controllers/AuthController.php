@@ -54,18 +54,7 @@ class AuthController extends Controller
     public function verify(UserVerifyRequest $request){
         $routeToken = $request->route('token');
 
-        //Use token and return user
-        $tokenObject = EmailVerificationToken::where('token', '=', $routeToken)->first();
-        $userToActivateId = $tokenObject->user->id;
-        $tokenObject->delete();
-
-        //ACTIVATE USER
-        $user = User::find($userToActivateId);
-        $timeOfActivation = now();
-        $user->email_verified_at = $timeOfActivation;
-        $user->save();
-
-
+        $user = $this->userService->verifyUser($routeToken);
         $token = auth()->login($user);
 
         return response()->json(['message' => 'Successfully activated account', 'body' => $token], 201);

@@ -19,6 +19,7 @@ use App\Implementation\RegexOptionService\ListRegexOptionsEloquent;
 use App\Implementation\RegexOptionService\ListRegexOptionsEloquentCache;
 use App\Implementation\UserService\LoginEloquentCache;
 use App\Implementation\UserService\LogoutCache;
+use App\Implementation\UserService\VerifyUserEloquent;
 use App\Interfaces\FormService\IFormCreate;
 use App\Interfaces\FormService\IFormSubmitResponse;
 use App\Interfaces\FormService\IGetForm;
@@ -30,6 +31,7 @@ use App\Interfaces\MailerService\IRegistrationEmail;
 use App\Interfaces\RegexOptionService\IListRegexOptions;
 use App\Interfaces\UserService\ILogin;
 use App\Interfaces\UserService\ILogout;
+use App\Interfaces\UserService\IVerifyUser;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -47,6 +49,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IListRegexOptions::class, ListRegexOptionsEloquentCache::class);
         $this->app->bind(ILogin::class, LoginEloquentCache::class);
         $this->app->bind(ILogout::class, LogoutCache::class);
+        $this->app->bind(IVerifyUser::class, VerifyUserEloquent::class);
         $this->app->bind(IListLinks::class, ListLinksEloquentCache::class);
 
         $this->app->bind(IListFormResponses::class, ListResponsesEloquent::class);
