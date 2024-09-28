@@ -2,15 +2,15 @@
 
 namespace App\Implementation\UserService;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Cache;
-
-class LoginEloquentCache extends LoginEloquent {
-    public function execute(string $email, string $password) : string{
-        $token = parent::execute($email, $password);
+class LoginDirectEloquentCache extends LoginDirectEloquent
+{
+    public function execute(User $user) : String
+    {
+        $token =  parent::execute($user);
         $tokenSchema = "users:tokens:$token";
         Cache::put($tokenSchema, 'valid', auth()->factory()->getTTL() * 60);
         return $token;
     }
 }
-
-?>

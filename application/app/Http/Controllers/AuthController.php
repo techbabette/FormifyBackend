@@ -55,7 +55,7 @@ class AuthController extends Controller
         $routeToken = $request->route('token');
 
         $user = $this->userService->verifyUser($routeToken);
-        $token = auth()->login($user);
+        $token = $this->userService->loginDirect($user);
 
         return response()->json(['message' => 'Successfully activated account', 'body' => $token], 201);
     }

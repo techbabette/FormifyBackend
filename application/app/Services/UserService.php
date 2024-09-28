@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\DataTransferObjects\UserRegistrationDTO;
 use App\Interfaces\UserService\ILogin;
-use App\Interfaces\UserService\ILogout;
+use App\Interfaces\UserService\ILoginDirect;use App\Interfaces\UserService\ILogout;
 use App\Interfaces\UserService\IVerifyUser;
 use App\Models\Group;
 use App\Models\User;
@@ -12,6 +12,7 @@ use App\Models\User;
 class UserService
 {
     public function __construct(protected ILogin $login,
+                                protected ILoginDirect $loginDirect,
                                 protected ILogout $logout,
                                 protected IVerifyUser $verifyUser,)
     {
@@ -31,6 +32,10 @@ class UserService
 
     public function login(String $email, String $password) : String{
         return $this->login->execute($email, $password);
+    }
+
+    public function loginDirect(User $user) : String{
+        return $this->loginDirect->execute($user);
     }
 
     public function logout($token) : void{
