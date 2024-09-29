@@ -22,7 +22,7 @@ class FormCreateEloquent implements IFormCreate
                     "input_id" => $element["type"]["id"],
                     "weight" => $element["weight"],
                     "width" => $element["width"],
-                    "required" => $element["required"],
+                    "required" => $element["required"] ? 1 : 0,
                     "label" => $element["label"],
                     "regex" => array_key_exists("regex", $element) ? $element["regex"] : null,
                     "minimum" => array_key_exists("minimum", $element) ? $element["minimum"] : null,

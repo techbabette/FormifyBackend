@@ -41,7 +41,7 @@ class FormController extends Controller
 
         $newFormId = $this->formService->createForm($user_id, $request->all());
         $response["message"] = "Successfully created form with id of $newFormId";
-
+        $response["body"] = ["id" => $newFormId];
         return response()->json($response);
     }
 
