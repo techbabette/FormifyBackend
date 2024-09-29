@@ -18,7 +18,7 @@ class GroupPermissionSeeder extends Seeder
             ["permission" => "UserLogoutRequest", "group_id" => 3],
 
             ["permission" => "FormListResponses", "group_id" => 2],
-            ["permission" => "FormListResponses", "group_id" => 2],
+            ["permission" => "FormListResponses", "group_id" => 3],
 
             ["permission" => "FormListPersonal", "group_id" => 2],
             ["permission" => "FormListPersonal", "group_id" => 3],
