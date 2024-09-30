@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer("weight");
             $table->unsignedInteger("width");
             $table->boolean("required");
-            $table->string("regex", 255)->nullable();
+            $table->mediumText("regex")->nullable();
             $table->integer("minimum")->nullable();
             $table->integer("maximum")->nullable();
             $table->timestamps();
