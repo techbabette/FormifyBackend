@@ -14,6 +14,7 @@ class ListResponsesEloquent implements IListFormResponses
         $responses->where('form_id', $id);
 
         $responses->with("responseValues.formInput");
+        $responses->orderBy('created_at', 'desc');
         $paginatedResponses = $responses->paginate(5);
 
         $reformatedResponses = [];
