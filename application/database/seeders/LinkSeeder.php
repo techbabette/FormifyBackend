@@ -18,7 +18,8 @@ class LinkSeeder extends Seeder
             ["text" => "Home", "position" => "main_navbar", "to" => "/", "weight" => 100],
             ["text" => "Register", "position" => "main_navbar", "to" => "/register", "weight" => 70],
             ["text" => "Create new form", "position" => "main_navbar", "to" => "/form/new", "weight" => 90],
-            ["text" => "Make your own form here!", "position" => "visiting_form_navbar", "to" => "/form/new", "weight" => 100]
+            ["text" => "Make your own form here!", "position" => "visiting_form_navbar", "to" => "/form/new", "weight" => 100],
+            ["text" => "My forms", "position" => "main_navbar", "to" => "/forms/me", "weight" => 95],
           ];
 
           foreach ($baseLinks as $input){

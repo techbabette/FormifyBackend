@@ -23,12 +23,14 @@ class GroupLinkSeeder extends Seeder
             ["group_id" => 2, "link_id" => 2],
             ["group_id" => 2, "link_id" => 4],
             ["group_id" => 2, "link_id" => 5],
+            ["group_id" => 2, "link_id" => 6],
 
             ["group_id" => 3, "link_id" => 2],
             ["group_id" => 3, "link_id" => 4],
             ["group_id" => 3, "link_id" => 5],
+            ["group_id" => 3, "link_id" => 6],
           ];
-  
+
           foreach ($baseGroupLinks as $group){
             GroupLink::insert($group);
           }
