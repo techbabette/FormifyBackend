@@ -13,7 +13,7 @@ class ListPersonalFormsEloquent implements IListPersonalForms
 
         $forms->where('user_id', $user_id);
         $forms->withCount("responses");
-        $forms->orderBy('responses_count', 'desc');
+        $forms->orderBy('created_at', 'desc');
 
         $paginatedForms = $forms->paginate(5);
 
