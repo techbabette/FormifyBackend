@@ -4,6 +4,8 @@ namespace App\Implementation\FormService;
 
 use App\Interfaces\FormService\IListPersonalForms;
 use App\Models\Form;
+use DateTime;
+
 class ListPersonalFormsEloquent implements IListPersonalForms
 {
 
@@ -20,7 +22,8 @@ class ListPersonalFormsEloquent implements IListPersonalForms
         $reformatedForms = [];
 
         foreach($paginatedForms->items() as $form){
-            $reformatedForms[] = ["id" => $form->id, "name" => $form->name, "created_at" => $form->created_at, "number_of_responses" => $form->responses_count];
+            $created_at_date = new DateTime($form->created_at);
+            $reformatedForms[] = ["id" => $form->id, "name" => $form->name, "created_at" => $created_at_date->format("Y-m-d H:i:s"), "number_of_responses" => $form->responses_count];
         }
 
         return [

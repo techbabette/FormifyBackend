@@ -4,6 +4,7 @@ namespace App\Implementation\FormService;
 
 use App\Interfaces\FormService\IListFormResponses;
 use App\Models\Response;
+use DateTime;
 
 class ListResponsesEloquent implements IListFormResponses
 {
@@ -20,9 +21,11 @@ class ListResponsesEloquent implements IListFormResponses
         $reformatedResponses = [];
 
         foreach ($paginatedResponses->items() as $responseItem) {
+            $created_at_date = new DateTime($responseItem->created_at);
+
             $reformatedResponse = [
                 "id" => $responseItem->id,
-                "created_at" => $responseItem->created_at,
+                "created_at" => $created_at_date->format("Y-m-d H:i:s"),
                 "values" => []
             ];
 
