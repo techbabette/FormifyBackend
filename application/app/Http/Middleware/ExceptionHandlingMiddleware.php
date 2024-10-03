@@ -22,15 +22,15 @@ class ExceptionHandlingMiddleware{
         }
 
         if($response->exception instanceof EntityNotFoundException){
-            return response()->json(['message' => $response->exception->getMessage()], 404);
+            return response()->json(['error' => $response->exception->getMessage()], 404);
         }
 
         if($response->exception instanceof UnauthenticatedException){
-            return response()->json(['message' => $response->exception->getMessage()], 401);
+            return response()->json(['error' => $response->exception->getMessage()], 401);
         }
 
         if($response->exception instanceof UnauthorizedException){
-            return response()->json(['message' => $response->exception->getMessage()], 403);
+            return response()->json(['error' => $response->exception->getMessage()], 403);
         }
 
         if($response->exception instanceof TokenExpiredException){
@@ -38,8 +38,7 @@ class ExceptionHandlingMiddleware{
         }
 
         if($response->status() >= 500){
-            return $response;
-            return response()->json(['message' => "Server error"], 500);
+            return response()->json(['error' => "Server error"], 500);
         }
 
         return $response;
