@@ -29,7 +29,11 @@ class ListResponsesEloquent implements IListFormResponses
                 "values" => []
             ];
 
-            foreach ($responseItem->responseValues as $responseValue) {
+            $responseValues = $responseItem->responseValues->sortByDesc(function ($responseValue) {
+                return $responseValue->formInput->weight;
+            });
+
+            foreach ($responseValues as $responseValue) {
                 $responseValueKey = $responseValue->formInput->label;
 
                 $responseValueKeyExists = array_key_exists($responseValueKey, $reformatedResponse["values"]);
