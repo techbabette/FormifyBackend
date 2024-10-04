@@ -20,6 +20,9 @@ class FormSubmitResponseEloquent implements IFormSubmitResponse
                 }
                 continue;
             }
+            if(!$value){
+                continue;
+            }
             ResponseValue::create(['response_id' => $newResponseId, 'form_input_id' => $key, 'value' => $value]);
         }
     }
