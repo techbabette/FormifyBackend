@@ -33,7 +33,7 @@ class FormCreateEloquent implements IFormCreate
             if(in_array($elementType, $elementTypesWithOptions)){
                 $elementHasDefaultOption = array_key_exists("defaultOption", $element);
                 foreach($element["options"] as $optionKey => $option){
-                    Option::create(["form_input_id" => $newElementId, "value" => $option, "default_selected" => $elementHasDefaultOption && $element["defaultOption"] === $optionKey]);
+                    Option::create(["form_input_id" => $newElementId, "value" => $option, "default_selected" => $elementHasDefaultOption && $element["defaultOption"] == $optionKey]);
                 }
             }
         }
