@@ -17,6 +17,7 @@ class FormCreateEloquent implements IFormCreate
         $elementTypesWithOptions = Input::typesWithOptions();
         foreach($requestFormElements as $element){
             $elementType = $element["type"]["id"];
+            $element["required"] = filter_var($element["required"], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
             $newElementId = FormInput::create(
                 ["form_id" => $newFormId,
                     "input_id" => $element["type"]["id"],
