@@ -21,3 +21,6 @@ application//.vscode
 .env
 .idea
 node_modules
+*.tfvars
+*.tfstate*
+.terraform*

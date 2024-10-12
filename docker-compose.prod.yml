@@ -7,6 +7,7 @@ services:
      - "443:443"
     environment:
       APP_ENV: dev
+      APP_DEBUG: false
       MQ: rabbitmq
       ADMIN_EMAIL: ${APPLICATION_ADMIN_EMAIL:-mail@fakemail.com}
       ADMIN_PASSWORD: ${APPLICATION_ADMIN_PASSWORD:-default_application}
