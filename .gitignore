@@ -24,3 +24,5 @@ node_modules
 *.tfvars
 *.tfstate*
 .terraform*
+hosts
+*.pub
