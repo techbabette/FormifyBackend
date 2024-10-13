@@ -40,5 +40,5 @@ variable "MAIL_PORT" {
 
 variable "FRONTEND_ACTIVATION_URL" {
     sensitive = false
-    default = "formify.techbabette.com/activate"
+    default = "https://formify.techbabette.com/activate"
 }
