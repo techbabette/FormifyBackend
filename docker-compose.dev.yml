@@ -9,6 +9,8 @@ services:
     environment:
       APP_ENV: dev
       MQ: rabbitmq
+      MQ_USER: ${RABBITMQ_USER:-root}
+      MQ_PASS: ${RABBITMQ_PASSWORD:-default_rabbitmq}
       ADMIN_EMAIL: ${APPLICATION_ADMIN_EMAIL:-mail@fakemail.com}
       ADMIN_PASSWORD: ${APPLICATION_ADMIN_PASSWORD:-default_application}
       DB_PASSWORD: ${MYSQL_PASSWORD:-default_mysql}
@@ -45,11 +47,11 @@ services:
   mailer-service:
     build:
       context: ./mailer-service
-      args:
-        MQ: 'rabbitmq'
     restart: unless-stopped
     environment:
       MQ: rabbitmq
+      MQ_USER: ${RABBITMQ_USER:-root}
+      MQ_PASS: ${RABBITMQ_PASSWORD:-default_rabbitmq}
       MAILHOST: ${MAIL_HOST}
       MAIL: ${MAIL_ADDRESS}
       MAILPASS: ${MAIL_PASSWORD}
@@ -66,6 +68,9 @@ services:
     image: rabbitmq:3-management-alpine
     container_name: 'rabbitmq'
     restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-root}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-default_rabbitmq}
     volumes:
         - rabbitmq_data:/var/lib/rabbitmq/
         - rabbitmq_logs:/var/log/rabbitmq

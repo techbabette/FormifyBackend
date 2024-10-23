@@ -1,7 +1,8 @@
 var amqp = require('amqplib/callback_api');
 
 function rabbitmq(transporter){
-    amqp.connect(`amqp://${process.env.MQ}`, function(error0, connection) {
+    console.log(process.env.MQ);
+    amqp.connect(`amqp://${process.env.MQ_USER}:${process.env.MQ_PASS}@${process.env.MQ}`, function(error0, connection) {
       if (error0) {
         throw error0;
       }
