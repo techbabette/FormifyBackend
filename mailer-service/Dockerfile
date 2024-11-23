@@ -1,8 +1,9 @@
-FROM node:20
+FROM node:20 AS build
 WORKDIR /app
-
-COPY . .
-
+COPY . /app
 RUN npm i
 
-CMD ["npm", "run", "start"] 
+FROM gcr.io/distroless/nodejs20-debian12
+WORKDIR /app
+COPY --from=build /app /app
+CMD ["index.js"] 
