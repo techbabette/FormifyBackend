@@ -1,5 +1,5 @@
 var amqp = require('amqplib/callback_api');
-
+const sendActivationMail = require('../libs/sendActivationMail');
 function rabbitmq(transporter){
     console.log(process.env.MQ);
     amqp.connect(`amqp://${process.env.MQ_USER}:${process.env.MQ_PASS}@${process.env.MQ}`, function(error0, connection) {
@@ -34,24 +34,15 @@ function rabbitmq(transporter){
 
           channel.consume(q.queue, data => {
             let message = JSON.parse(data.content.toString());
-            let mailOptions = {
-              to: message.email,
-              html: `Click <a href="${process.env.ACTIVATION_URL}/${message.token}">here to activate your acount</a>`,
-              text: `Click the following link to activate your account ${process.env.ACTIVATION_URL}/${message.token}`,
-              subject: "Formify activation mail"
-            }
-
-            transporter.sendMail(mailOptions, (error, info) => {
-              if (error){
-                console.log(error.stack)
-                return channel.nack(data);
-              }
-
+            sendActivationMail(transporter, message.email, message.token)
+            .then((info) => {
               console.log("Delivered message", info.messageId);
-              channel.ack(data);
-            });
-
-            channel.ack(data);
+              channel.ack(data)
+            })
+            .catch((error) => {
+              console.log(error.stack);
+              channel.nack(data);
+            })
           });
         });
       });
