@@ -18,13 +18,10 @@ let transporter = nodemailer.createTransport({
 })
 
 messageSourceMap = {
-  "rabbitmq" : rabbitmq,
-  "sqs" : pollSQS
+  "rabbitmq" : rabbitmq
 }
 
 functionToRun = messageSourceMap[process.env.MESSAGE_SOURCE];
-functionToRun(transporter);
-
-function pollSQS(transporter){
-  
+if (functionToRun){
+  functionToRun(transporter);
 }
