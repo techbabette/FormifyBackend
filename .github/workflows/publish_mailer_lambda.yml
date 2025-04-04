@@ -1,4 +1,4 @@
-name: Publish mailer service image to ECR
+name: Publish mailer service lambda image to ECR
 
 on:
   workflow_dispatch:
