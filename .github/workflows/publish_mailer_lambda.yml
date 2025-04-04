@@ -38,10 +38,9 @@ jobs:
       run: |
         docker buildx build --platform linux/amd64,linux/arm64 \
          -f ./mailer-service/Dockerfile_lambda \
-         -t $ECR_REGISTRY/$ECR_REGISTRY_ALIAS/$ECR_REPOSITORY:$IMAGE_TAG \
+         -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
          --push ./mailer-service
       env:
         ECR_REGISTRY: ${{ steps.login_ecr.outputs.registry }}
-        ECR_REGISTRY_ALIAS: ${{ vars.ECR_REGISTRY_ALIAS }}
         ECR_REPOSITORY: formify/mailer-service
         IMAGE_TAG: lambda-latest
