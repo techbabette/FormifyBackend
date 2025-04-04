@@ -44,4 +44,4 @@ jobs:
         ECR_REGISTRY: ${{ steps.login_ecr.outputs.registry }}
         ECR_REGISTRY_ALIAS: ${{ vars.ECR_REGISTRY_ALIAS }}
         ECR_REPOSITORY: formify/mailer-service
-        IMAGE_TAG: lambda:latest
+        IMAGE_TAG: lambda-latest
