@@ -25,3 +25,12 @@ functionToRun = messageSourceMap[process.env.MESSAGE_SOURCE];
 if (functionToRun){
   functionToRun(transporter);
 }
+
+exports.handler = async (event, context) => {
+  for (let message of event.records){
+    const jsonObject = JSON.parse(message.body);
+    const email = jsonObject.body.email;
+    const token = jsonObject.body.token;
+    await sendActivationMail(transporter, email, token)
+  }
+}
